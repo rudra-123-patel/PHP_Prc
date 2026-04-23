@@ -51,10 +51,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
      
     }else{
-        echo "invalid input";
+        echo "invalid input please enter valid input";
     }
 }
-
+s
 
 ?>
 
