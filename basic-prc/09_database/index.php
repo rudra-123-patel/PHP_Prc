@@ -33,6 +33,9 @@ if ($pdo){
             <img src="<?php echo $contact['image']; ?>" height="50">
             <?php echo "{$contact['name']}- {$contact['email']}-{$contact['phone']}";?>
         </li>
+        <a href="edit.php?id=<?php echo $contact['id'] ?>">
+            Edit
+        </a>
         <a href="delete.php?id=<?php echo $contact['id'] ?>">
             Delete
         </a>
