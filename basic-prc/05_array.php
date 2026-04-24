@@ -45,6 +45,15 @@ var_dump($user);
 print_r($user);
 echo "</pre>";
 
+$color=[
+    "1"=>"red",
+    "2"=> " green",
+    "3"=> "blue",
+];
+echo $color["1"]."<br>";
+echo $color["2"]."<br>";
+echo $color["3"]."<br>";
+
 
  
 

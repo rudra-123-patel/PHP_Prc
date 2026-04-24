@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
         
         echo "Contact updated successfully.";
-        // Update $contact array so the form reflects the new changes
         $contact['name'] = $name;
         $contact['email'] = $email;
         $contact['phone'] = $phone;
@@ -48,24 +47,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="index.php">Back to Contacts</a><br><br>
-    
+<div class="container">
+    <h2>Edit Contact</h2>
+    <a href="index.php" class="btn">Back to Contacts</a>
     <form action="" method="post">
-        <label >Name:</label>
-        <input type="text" name="name" value="<?php echo htmlspecialchars($contact['name'] ?? ''); ?>">
-        <br>
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="name" value="<?php echo htmlspecialchars($contact['name'] ?? ''); ?>" required>
+        </div>
 
-        <label >Email:</label>
-        <input type="email" name="email" value="<?php echo htmlspecialchars($contact['email'] ?? ''); ?>">
-        <br>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" value="<?php echo htmlspecialchars($contact['email'] ?? ''); ?>" required>
+        </div>
 
-        <label>Phone:</label>
-        <input type="text" name="phone" value="<?php echo htmlspecialchars($contact['phone'] ?? ''); ?>">
-        <br>
+        <div class="form-group">
+            <label>Phone:</label>
+            <input type="text" name="phone" value="<?php echo htmlspecialchars($contact['phone'] ?? ''); ?>" required>
+        </div>
 
-        <button type="submit">Update contact</button>
+        <button type="submit" class="btn">Update Contact</button>
     </form>
+</div>
 </body>
 </html>

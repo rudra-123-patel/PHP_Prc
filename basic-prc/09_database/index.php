@@ -10,6 +10,8 @@ if ($pdo){
 
     $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
 }
 
 
@@ -20,29 +22,31 @@ if ($pdo){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form php</title>
+    <title>Contacts</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="create.php">Create a new contact</a>
+<div class="container">
+    <h2>Contact List</h2>
+    <a href="create.php" class="btn">Create a new contact</a>
 
-
-<ul>
-    <?php foreach($contacts as $contact): ?>
-
-        <li>
-            <img src="<?php echo $contact['image']; ?>" height="50">
-            <?php echo "{$contact['name']}- {$contact['email']}-{$contact['phone']}";?>
-        </li>
-        <a href="edit.php?id=<?php echo $contact['id'] ?>">
-            Edit
-        </a>
-        <a href="delete.php?id=<?php echo $contact['id'] ?>">
-            Delete
-        </a>
-
-    <?php endforeach;?>
-</ul>
-
-
+    <ul class="contact-list">
+        <?php foreach($contacts as $contact): ?>
+            <li class="contact-card">
+                <div class="contact-info">
+                    <img src="<?php echo htmlspecialchars($contact['image']); ?>" alt="Profile">
+                    <div>
+                        <strong><?php echo htmlspecialchars($contact['name']); ?></strong><br>
+                        <?php echo htmlspecialchars($contact['email']); ?> - <?php echo htmlspecialchars($contact['phone']); ?>
+                    </div>
+                </div>
+                <div class="contact-actions">
+                    <a href="edit.php?id=<?php echo $contact['id'] ?>" class="btn">Edit</a>
+                    <a href="delete.php?id=<?php echo $contact['id'] ?>" class="btn btn-danger">Delete</a>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
 </body>
 </html>

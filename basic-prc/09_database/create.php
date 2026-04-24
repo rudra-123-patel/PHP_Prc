@@ -63,27 +63,36 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form php</title>
+    <title>Add Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+    <h2>Add New Contact</h2>
+    <a href="index.php" class="btn">Back to Contacts</a>
     <form action="" method="post" enctype="multipart/form-data">
-        <label >Name:</label>
-        <input type="text" name="name" >
-        <br>
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" name="name" required>
+        </div>
 
-        <label >Email:</label>
-        <input type="email" name="email" >
-        <br>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" required>
+        </div>
 
-        <label>Phone:</label>
-        <input type="text" name="phone" >
-        <br>
+        <div class="form-group">
+            <label>Phone:</label>
+            <input type="text" name="phone" required>
+        </div>
 
-        <label>Image:</label>
-        <input type="file" name="image" accept="image/*" >
-        <br>
+        <div class="form-group">
+            <label>Image:</label>
+            <input type="file" name="image" accept="image/*" required>
+        </div>
 
-        <button type="submit">Add contact</button>
+        <button type="submit" class="btn">Add Contact</button>
     </form>
+</div>
 </body>
 </html>
