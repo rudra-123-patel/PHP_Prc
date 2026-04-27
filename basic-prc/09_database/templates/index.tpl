@@ -9,6 +9,13 @@
 <body>
     <div class="container">
         <h1>Contacts List</h1>
+
+        {if isset($message)}
+            <p style="color: #155724; background-color: #d4edda; padding: 10px; border-radius: 5px; border: 1px solid #c3e6cb;">
+                <strong>{$message}</strong>
+            </p>
+        {/if}
+
         <a href="create.php" class="btn">Create a new contact</a>
         <br><br>
 

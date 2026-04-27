@@ -16,5 +16,13 @@ if ($pdo) {
     $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+$message = null;
+if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
+    $message = "Contact deleted successfully.";
+}
+if ($message) {
+    $smarty->assign('message', $message);
+}
+
 $smarty->assign('contacts', $contacts);
 $smarty->display('index.tpl');

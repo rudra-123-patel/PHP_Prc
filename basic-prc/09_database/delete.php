@@ -21,7 +21,8 @@ if(isset($_GET['id'])){
      $stmt= $pdo->prepare('DELETE FROM contacts WHERE id=:id');
      $stmt->execute([':id'=>$contactId]);
 
-     echo "contact deleted";
+     header("Location: index.php?msg=deleted");
+     exit;
 
 }
 

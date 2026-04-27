@@ -70,16 +70,42 @@ echo "<br>";
 $t= date("H");
 
 
-echo $t;
+// echo $t;
 
-if($t<12){
-    echo "Good morning!";
-}elseif($t<18){
-    echo "Good afternoon!";
+// if($t<12){
+//     echo "Good morning!";
+// }elseif($t<17){
+//     echo "Good afternoon!";
 
-}
-else{
-    echo "Good evening!";
-}
+// }
+// else{
+//     echo "Good evening!";
+// }
+
+$posts =["First post","Second post","Third post"];
+
+
+// if(!empty($posts)){
+    // echo count($posts)." posts available"."<br>";
+    // echo "Posts available"."<br>";
+    // echo $posts[0];
+    // echo $posts[0];
+
+//     foreach($posts as $post){
+//         echo $post."<br>";
+//     }
+
+// }else{
+//     echo "No posts";
+// }
+
+// echo !empty($posts) ? $posts[0] : "No post";
+
+// $firstPost = !empty($posts) ? $posts[0] : "No post";
+// echo $firstPost;
+
+$firstPost = $posts[0]?? null;
+echo $firstPost;
+
 
 ?>

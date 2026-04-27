@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.3, created on 2026-04-27 07:05:24
+/* Smarty version 4.5.3, created on 2026-04-27 09:30:41
   from 'C:\wamp64\www\basic-prc\09_database\templates\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.3',
-  'unifunc' => 'content_69ef0ab4c523b4_02107628',
+  'unifunc' => 'content_69ef2cc1bf7410_98047028',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '83b325535234ec5747620178368afc1fe4654efd' => 
     array (
       0 => 'C:\\wamp64\\www\\basic-prc\\09_database\\templates\\index.tpl',
-      1 => 1777273523,
+      1 => 1777282232,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_69ef0ab4c523b4_02107628 (Smarty_Internal_Template $_smarty_tpl) {
+function content_69ef2cc1bf7410_98047028 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\wamp64\\www\\basic-prc\\09_database\\libs\\plugins\\modifier.count.php','function'=>'smarty_modifier_count',),));
 ?>
 <!DOCTYPE html>
@@ -34,6 +34,14 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\wamp64\\www\\basic-prc\\
 <body>
     <div class="container">
         <h1>Contacts List</h1>
+
+        <?php if ((isset($_smarty_tpl->tpl_vars['message']->value))) {?>
+            <p style="color: #155724; background-color: #d4edda; padding: 10px; border-radius: 5px; border: 1px solid #c3e6cb;">
+                <strong><?php echo $_smarty_tpl->tpl_vars['message']->value;?>
+</strong>
+            </p>
+        <?php }?>
+
         <a href="create.php" class="btn">Create a new contact</a>
         <br><br>
 
