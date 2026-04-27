@@ -55,6 +55,45 @@ echo $color["2"]."<br>";
 echo $color["3"]."<br>";
 
 
+$people=[
+    [
+        'name'=>'rudra',
+        'age'=>22,
+        'email'=>'rjp1@g.com'
+    ]
+    ,[
+        'name'=>'raj',
+        'age'=>23,
+        'email'=>'rjp2@g.com'
+    ],[
+        'name'=>'ruxra',
+        'age'=>24,
+        'email'=>'rjp3@g.com'
+    ]
+];
+
+echo $people[0]['name']."<br>";
+echo $people[0]["email"]."<br>";
+echo $people[0]["age"]."<br>";
+
+
+echo $people[1]['name'].'<br>';
+echo $people[1]['email'].'<br>';
+echo $people[1]['age'].'<br>';
+
+
+echo $people[2]['name'].'<br>';
+echo $people[2]['email'].'<br>';
+echo $people[2]['age'].'<br>';
+
+
+// var_dump($people);
+// print_r($people);
+
+var_dump(json_encode ($people));
+
+
+
  
 
 

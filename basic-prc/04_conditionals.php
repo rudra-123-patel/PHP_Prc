@@ -63,4 +63,23 @@ switch($day){
     echo "Invalid day";
 }
 
+echo "<br>";
+
+
+// $t= date("F j");
+$t= date("H");
+
+
+echo $t;
+
+if($t<12){
+    echo "Good morning!";
+}elseif($t<18){
+    echo "Good afternoon!";
+
+}
+else{
+    echo "Good evening!";
+}
+
 ?>

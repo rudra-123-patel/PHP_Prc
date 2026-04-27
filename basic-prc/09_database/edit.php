@@ -1,7 +1,13 @@
 <?php
 $pdo = require "db.php";
+require_once 'libs/Smarty.class.php';
+
+$smarty = new Smarty();
+$smarty->setTemplateDir('templates');
+$smarty->setCompileDir('templates_c');
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+$message = null;
 
 // Check if contact exists
 if ($id) {
@@ -30,47 +36,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':id' => $id
         ]);
         
-        echo "Contact updated successfully.";
+        $message = "Contact updated successfully.";
         $contact['name'] = $name;
         $contact['email'] = $email;
         $contact['phone'] = $phone;
     } else {
-        echo "invalid input please enter valid input";
+        $message = "invalid input please enter valid input";
     }
 }
 
-?>
+if ($message !== null) {
+    $smarty->assign('message', $message);
+}
+$smarty->assign('contact', $contact);
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Contact</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
-    <h2>Edit Contact</h2>
-    <a href="index.php" class="btn">Back to Contacts</a>
-    <form action="" method="post">
-        <div class="form-group">
-            <label>Name:</label>
-            <input type="text" name="name" value="<?php echo htmlspecialchars($contact['name'] ?? ''); ?>" required>
-        </div>
-
-        <div class="form-group">
-            <label>Email:</label>
-            <input type="email" name="email" value="<?php echo htmlspecialchars($contact['email'] ?? ''); ?>" required>
-        </div>
-
-        <div class="form-group">
-            <label>Phone:</label>
-            <input type="text" name="phone" value="<?php echo htmlspecialchars($contact['phone'] ?? ''); ?>" required>
-        </div>
-
-        <button type="submit" class="btn">Update Contact</button>
-    </form>
-</div>
-</body>
-</html>
+$smarty->display('edit.tpl');

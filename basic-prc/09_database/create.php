@@ -1,12 +1,14 @@
 <?php
 
 $pdo = require "db.php";
-// echo "hello from index php";
-// var_dump($_SERVER,$_GET,$_POST);
+require_once 'libs/Smarty.class.php';
+
+$smarty = new Smarty();
+$smarty->setTemplateDir('templates');
+$smarty->setCompileDir('templates_c');
 
 $uploadDir = "uploads/";
-
-// var_dump($_FILES);
+$message = null;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $name = filter_input(
@@ -32,67 +34,28 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
         if(move_uploaded_file($_FILES['image']['tmp_name'],$imagePath)){
            
+            $stmt = $pdo->prepare("INSERT INTO contacts(name,email,phone,image) VALUES(:name,:email,:phone,:image)");
 
-        $stmt = $pdo->prepare("INSERT INTO contacts(name,email,phone,image) VALUES(:name,:email,:phone,:image)");
+            $stmt->execute([
+                ':name'=>$name,
+                ':email'=>$email,
+                ':phone'=>$phone,
+                ':image'=>$imagePath
+            ]);
 
-        $stmt->execute([
-            ':name'=>$name,
-            ':email'=>$email,
-            ':phone'=>$phone,
-            ':image'=>$imagePath
-        ]);
-
-
-        echo "Contact added: $name ($email,$phone)";
+            $message = "Contact added: $name ($email, $phone)";
 
         }else{
-            echo "Failed to upload image.";
+            $message = "Failed to upload image.";
         }
-
      
     }else{
-        echo "invalid input please enter valid input";
+        $message = "invalid input please enter valid input";
     }
 }
 
+if ($message !== null) {
+    $smarty->assign('message', $message);
+}
 
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Contact</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
-    <h2>Add New Contact</h2>
-    <a href="index.php" class="btn">Back to Contacts</a>
-    <form action="" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label>Name:</label>
-            <input type="text" name="name" required>
-        </div>
-
-        <div class="form-group">
-            <label>Email:</label>
-            <input type="email" name="email" required>
-        </div>
-
-        <div class="form-group">
-            <label>Phone:</label>
-            <input type="text" name="phone" required>
-        </div>
-
-        <div class="form-group">
-            <label>Image:</label>
-            <input type="file" name="image" accept="image/*" required>
-        </div>
-
-        <button type="submit" class="btn">Add Contact</button>
-    </form>
-</div>
-</body>
-</html>
+$smarty->display('create.tpl');
