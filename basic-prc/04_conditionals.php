@@ -104,8 +104,21 @@ $posts =["First post","Second post","Third post"];
 // $firstPost = !empty($posts) ? $posts[0] : "No post";
 // echo $firstPost;
 
-$firstPost = $posts[0]?? null;
-echo $firstPost;
+// $firstPost = $posts[0]?? null;
+// echo $firstPost;
 
+
+$favColor = 'red';
+
+switch($favColor){
+    case 'red':
+        echo "Your favorite color is red!";
+        break;
+    case 'blue':
+        echo "Your favorite color is blue!";
+        break;
+        default:
+        echo "you dont have fav color";
+}
 
 ?>

@@ -1,28 +1,19 @@
 <?php
-$pdo = require 'db.php';
-require_once 'libs/Smarty.class.php';
+$conn = require 'db.php'; // Changed variable name to $conn for clarity
+require_once('smarty.php');
 
-$smarty = new Smarty();
-$smarty->setTemplateDir('templates');
-$smarty->setCompileDir('templates_c');
 
 $contacts = [];
 
-if ($pdo) {
-    // Query to fetch all contacts
-    $stmt = $pdo->query("SELECT * FROM contacts");
-
-    // Fetch all results as an associative array
-    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if ($conn) {
+    $result = $conn->query("SELECT * FROM contacts");
+    if ($result) {
+        $contacts = $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 
-$message = null;
-if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
-    $message = "Contact deleted successfully.";
-}
-if ($message) {
-    $smarty->assign('message', $message);
-}
+$message = (isset($_GET['msg']) && $_GET['msg'] === 'deleted') ? "Contact deleted successfully." : null;
 
+$smarty->assign('message', $message);
 $smarty->assign('contacts', $contacts);
 $smarty->display('index.tpl');

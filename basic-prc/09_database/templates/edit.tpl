@@ -4,34 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Contact</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Edit Contact</h1>
-        <a href="index.php" class="btn">Back to Contacts</a>
-        <br><br>
         
         {if isset($message)}
-            <p><strong>{$message}</strong></p>
+            <div class="alert {if $message|strpos:'invalid' !== false}alert-danger{else}alert-success{/if}" style="{if $message|strpos:'invalid' !== false}background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca;{/if}">
+                {$message}
+            </div>
         {/if}
 
         <form action="" method="post">
-            <p>
-                <label>Name:</label><br>
-                <input type="text" name="name" value="{$contact.name|escape}" required style="width:100%; padding:8px;">
-            </p>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" value="{$contact.name|escape}" required>
+            </div>
 
-            <p>
-                <label>Email:</label><br>
-                <input type="email" name="email" value="{$contact.email|escape}" required style="width:100%; padding:8px;">
-            </p>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" value="{$contact.email|escape}" required>
+            </div>
 
-            <p>
-                <label>Phone:</label><br>
-                <input type="text" name="phone" value="{$contact.phone|escape}" required style="width:100%; padding:8px;">
-            </p>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" value="{$contact.phone|escape}" required>
+            </div>
 
-            <button type="submit" class="btn">Update contact</button>
+            <div style="display: flex; gap: 12px; margin-top: 32px;">
+                <button type="submit" class="btn" style="flex: 1;">Update Contact</button>
+                <a href="index.php" class="btn btn-outline" style="flex: 1; text-align: center;">Cancel</a>
+            </div>
         </form>
     </div>
 </body>

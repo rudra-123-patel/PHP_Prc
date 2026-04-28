@@ -1,25 +1,18 @@
 <?php
-$pdo = require "db.php";
-require_once 'libs/Smarty.class.php';
+$conn = require "db.php";
+// ... (Smarty setup)
+require_once('smarty.php');
 
-$smarty = new Smarty();
-$smarty->setTemplateDir('templates');
-$smarty->setCompileDir('templates_c');
 
-$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-$message = null;
+$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
-// Check if contact exists
 if ($id) {
-    $stmt = $pdo->prepare("SELECT * FROM contacts WHERE id = :id");
-    $stmt->execute([':id' => $id]);
-    $contact = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt = $conn->prepare("SELECT * FROM contacts WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $contact = $stmt->get_result()->fetch_assoc();
 
-    if (!$contact) {
-        die("Contact not found!");
-    }
-} else {
-    die("Invalid ID!");
+    if (!$contact) die("Contact not found!");
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,27 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
     $phone = filter_input(INPUT_POST, "phone", FILTER_SANITIZE_NUMBER_INT);
 
-    if ($name && $email && $phone) {
-        $stmt = $pdo->prepare("UPDATE contacts SET name = :name, email = :email, phone = :phone WHERE id = :id");
-        $stmt->execute([
-            ':name' => $name,
-            ':email' => $email,
-            ':phone' => $phone,
-            ':id' => $id
-        ]);
-        
-        $message = "Contact updated successfully.";
-        $contact['name'] = $name;
-        $contact['email'] = $email;
-        $contact['phone'] = $phone;
-    } else {
-        $message = "invalid input please enter valid input";
-    }
+    $stmt = $conn->prepare("UPDATE contacts SET name=?, email=?, phone=? WHERE id=?");
+    $stmt->bind_param("sssi", $name, $email, $phone, $id);
+    $stmt->execute();
+    
+    header("Location: index.php"); // Redirect after edit
+    exit;
 }
 
-if ($message !== null) {
-    $smarty->assign('message', $message);
-}
 $smarty->assign('contact', $contact);
-
 $smarty->display('edit.tpl');

@@ -1,5 +1,5 @@
 <?php
-echo "hello"."<br>";
+// echo "hello"."<br>";
 
 // Simple function
 
@@ -39,4 +39,10 @@ function multiply($a,$b){
 
 $result = multiply(10,20);
 echo $result."<br>";
+
+function userRegistered(){
+    echo 'user registered';
+}
+
+userRegistered();
 ?>

@@ -8,35 +8,48 @@
 </head>
 <body>
     <div class="container">
-        <h1>Contacts List</h1>
-
+        <h1>Contacts</h1>
+        
         {if isset($message)}
-            <p style="color: #155724; background-color: #d4edda; padding: 10px; border-radius: 5px; border: 1px solid #c3e6cb;">
-                <strong>{$message}</strong>
-            </p>
+            <div class="alert alert-success">
+                {$message}
+            </div>
         {/if}
 
-        <a href="create.php" class="btn">Create a new contact</a>
-        <br><br>
+        <div class="header-actions">
+            <a href="create.php" class="btn">Add New Contact</a>
+        </div>
 
         {if $contacts|@count > 0}
-            <ul style="padding: 0;">
+            <ul class="contact-list">
                 {foreach from=$contacts item=contact}
-                    <li style="margin-bottom: 15px; list-style-type: none; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #fafafa;">
+                    <li class="contact-item">
                         {if $contact.image}
-                            <img src="{$contact.image|escape}" height="50" style="vertical-align: middle; margin-right: 10px; border-radius: 50%;">
+                            <img src="{$contact.image|escape}" alt="{$contact.name|escape}" class="contact-avatar">
+                        {else}
+                            <div class="contact-avatar" style="background-color: #e4e4e7; display: flex; align-items: center; justify-content: center; color: #71717a; font-weight: 600; font-size: 18px;">
+                                {$contact.name|substr:0:1|upper}
+                            </div>
                         {/if}
-                        <strong>{$contact.name|escape}</strong> - {$contact.email|escape} - {$contact.phone|escape}
                         
-                        <div style="margin-top: 10px;">
-                            <a href="edit.php?id={$contact.id}" class="btn" style="padding: 5px 10px; font-size: 12px;">Edit</a>
-                            <a href="delete.php?id={$contact.id}" class="btn" style="padding: 5px 10px; font-size: 12px; background-color: #dc3545;">Delete</a>
+                        <div class="contact-info">
+                            <div class="contact-name">{$contact.name|escape}</div>
+                            <div class="contact-details">
+                                {$contact.email|escape} &bull; {$contact.phone|escape}
+                            </div>
+                        </div>
+                        
+                        <div class="contact-actions">
+                            <a href="edit.php?id={$contact.id}" class="btn btn-outline">Edit</a>
+                            <a href="delete.php?id={$contact.id}" class="btn btn-danger">Delete</a>
                         </div>
                     </li>
                 {/foreach}
             </ul>
         {else}
-            <p>No contacts found. Please add some!</p>
+            <div class="empty-state">
+                <p>No contacts found. Please add some!</p>
+            </div>
         {/if}
     </div>
 </body>
