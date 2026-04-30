@@ -6,7 +6,6 @@ try {
         throw new Exception("Connection failed: " . $conn->connect_error);
     }
 
-    // Use IF NOT EXISTS so the app doesn't crash after the first run
     $sql = "CREATE TABLE IF NOT EXISTS contacts (
         id INT PRIMARY KEY AUTO_INCREMENT,
         name TEXT NOT NULL,

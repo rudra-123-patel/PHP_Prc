@@ -1,6 +1,5 @@
 <?php
 $conn = require "db.php";
-// ... (Smarty setup)
 require_once('smarty.php');
 
 

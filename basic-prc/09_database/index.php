@@ -1,5 +1,5 @@
 <?php
-$conn = require 'db.php'; // Changed variable name to $conn for clarity
+$conn = require 'db.php'; 
 require_once('smarty.php');
 
 

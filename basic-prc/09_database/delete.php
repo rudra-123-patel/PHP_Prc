@@ -4,7 +4,6 @@ $conn = require "db.php";
 if(isset($_GET['id'])){
     $contactId = (int)$_GET['id'];
 
-    // Get image to delete file
     $stmt = $conn->prepare("SELECT image FROM contacts WHERE id = ?");
     $stmt->bind_param("i", $contactId);
     $stmt->execute();

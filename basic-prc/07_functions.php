@@ -40,9 +40,12 @@ function multiply($a,$b){
 $result = multiply(10,20);
 echo $result."<br>";
 
-function userRegistered(){
-    echo 'user registered';
+$y = 10;
+function userRegistered($email){
+    global $y;
+    echo $y;
+    echo $email . ' registered';
 }
 
-userRegistered();
+userRegistered("raj");
 ?>
