@@ -1,24 +1,24 @@
 <?php
 
-/*
 
-we can pass data through urls and forms using the $_GET and $_POST superglobals.
 
-*/
 
 if(isset($_POST['submit'])){
-echo $_POST['name'];
-echo $_POST['age'];
+   $name = filter_input(INPUT_POST,'name',FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $age = filter_input(INPUT_POST,'age',FILTER_SANITIZE_SPECIAL_CHARS);
+
+    echo $name;
+    echo $age;
 
 }
 
 
 ?>
 
-<a href="<?php echo $_SERVER['PHP_SELF'];?>?name=raj&age=22">Click</a>
 
 
-<form action="<?php echo $_SERVER['PHP_SELF'];?>"
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>"
 method="POST"
 >
 <div>
